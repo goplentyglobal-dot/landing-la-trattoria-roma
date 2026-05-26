@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="es-CO">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>La Trattoria Roma</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #0E0E0E;
+  --secondary: #C9A84C;
+  --bg: #FFFFFF;
+  --ink: #0E0E0E;
+  --ink-2: #4A4A4A;
+  --ink-3: #888888;
+  --line: rgba(14,14,14,0.08);
+  --surface: #FAFAF9;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: "DM Sans", system-ui, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.55; }
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+.eyebrow { font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--secondary); font-weight: 600; }
+h1, h2, h3 { font-family: "Playfair Display", serif; font-weight: 700; letter-spacing: -0.01em; line-height: 1.05; }
+
+/* NAV */
+.nav { position: fixed; top: 0; left: 0; right: 0; z-index: 50; backdrop-filter: blur(14px) saturate(1.2); background: rgba(255,255,255,0.82); border-bottom: 1px solid var(--line); }
+.nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 14px 32px; max-width: 1400px; margin: 0 auto; }
+.nav-brand { display: flex; align-items: center; gap: 10px; font-family: "Playfair Display", serif; font-size: 20px; font-weight: 700; }
+.nav-brand img { height: 28px; width: 28px; object-fit: contain; border-radius: 50%; }
+.nav-links { display: flex; gap: 28px; font-size: 13px; font-weight: 500; }
+.nav-links a:hover { color: var(--secondary); }
+.nav-cta { background: var(--ink); color: #fff; padding: 9px 16px; border-radius: 999px; font-size: 12px; font-weight: 600; letter-spacing: 0.04em; }
+@media (max-width: 720px) { .nav-links { display: none; } }
+
+/* HERO */
+.hero { position: relative; min-height: 100vh; display: grid; grid-template-columns: 1.05fr 1fr; align-items: center; padding-top: 70px; gap: 40px; max-width: 1400px; margin: 0 auto; padding-left: 32px; padding-right: 32px; }
+.hero-content { padding: 60px 0; max-width: 580px; }
+.hero h1 { font-size: clamp(48px, 7vw, 92px); margin: 18px 0 24px; font-weight: 900; }
+.hero h1 em { color: var(--secondary); font-style: italic; font-weight: 500; }
+.hero .lede { font-size: 18px; color: var(--ink-2); margin-bottom: 36px; max-width: 480px; }
+.hero-cta { display: inline-flex; align-items: center; gap: 12px; background: var(--ink); color: #fff; padding: 16px 28px; border-radius: 999px; font-size: 14px; font-weight: 600; letter-spacing: 0.04em; transition: transform 0.2s ease; }
+.hero-cta:hover { transform: translateY(-2px); }
+.hero-cta .arrow { width: 18px; height: 18px; }
+.hero-meta { display: flex; gap: 20px; margin-top: 40px; font-size: 12px; color: var(--ink-3); letter-spacing: 0.02em; }
+.hero-meta .dot-sep { color: var(--line); }
+.hero-meta a:hover { color: var(--secondary); }
+
+.hero-visual { position: relative; height: 80vh; min-height: 480px; }
+.hero-visual img { width: 100%; height: 100%; object-fit: cover; border-radius: 4px; }
+.hero-visual::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.25));
+  border-radius: 4px;
+}
+.hero-stamp { position: absolute; bottom: 28px; left: 28px; right: 28px; color: #fff; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; display: flex; justify-content: space-between; z-index: 2; opacity: 0.85; }
+
+@media (max-width: 920px) {
+  .hero { grid-template-columns: 1fr; padding-top: 90px; }
+  .hero-visual { height: 60vh; }
+}
+
+/* ABOUT */
+.about { padding: 120px 0 100px; background: var(--surface); }
+.about-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px; align-items: start; }
+.about h2 { font-size: clamp(36px, 5vw, 56px); }
+.about p { font-size: 17px; color: var(--ink-2); margin-top: 24px; max-width: 520px; }
+.about-contact { display: flex; flex-direction: column; gap: 12px; margin-top: 36px; font-size: 13px; color: var(--ink-3); }
+.about-contact span { display: inline-flex; align-items: center; gap: 8px; }
+@media (max-width: 720px) { .about-grid { grid-template-columns: 1fr; gap: 32px; } }
+
+/* MENU */
+.menu { padding: 120px 0 100px; }
+.menu-head { text-align: center; margin-bottom: 60px; }
+.menu-head h2 { font-size: clamp(40px, 6vw, 64px); margin-top: 14px; }
+.menu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 28px; }
+.dish { background: #fff; border: 1px solid var(--line); border-radius: 4px; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+.dish:hover { transform: translateY(-4px); box-shadow: 0 12px 32px -12px rgba(0,0,0,0.18); }
+.dish-img { aspect-ratio: 4 / 3; background: var(--surface); overflow: hidden; }
+.dish-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+.dish:hover .dish-img img { transform: scale(1.04); }
+.dish-body { padding: 22px 22px 20px; display: flex; flex-direction: column; flex: 1; gap: 8px; }
+.dish-name { font-family: "Playfair Display", serif; font-size: 22px; font-weight: 600; line-height: 1.1; }
+.dish-desc { font-size: 13px; color: var(--ink-3); line-height: 1.5; flex: 1; }
+.dish-row { display: flex; align-items: center; justify-content: space-between; margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--line); }
+.dish-price { font-family: "Playfair Display", serif; font-size: 22px; font-weight: 700; color: var(--ink); }
+.dish-order { background: var(--secondary); color: var(--ink); padding: 9px 14px; border-radius: 999px; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; border: 0; cursor: pointer; transition: transform 0.15s ease; }
+.dish-order:hover { transform: translateY(-1px); }
+
+/* LOCATION */
+.location { padding: 100px 0; background: var(--ink); color: #fff; }
+.location-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+.location h2 { font-size: clamp(36px, 5vw, 56px); color: #fff; }
+.location p { font-size: 16px; color: rgba(255,255,255,0.7); margin-top: 16px; max-width: 420px; }
+.location-addr { font-size: 18px; margin: 24px 0; }
+.location-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
+.loc-btn { padding: 14px 22px; border-radius: 999px; font-size: 13px; font-weight: 600; letter-spacing: 0.04em; background: var(--secondary); color: var(--ink); border: 0; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; }
+.loc-btn.ghost { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.25); }
+.loc-btn:hover { transform: translateY(-2px); }
+.location-map { aspect-ratio: 4/3; border-radius: 4px; overflow: hidden; background: #1A1A1A; position: relative; }
+.location-map iframe { width: 100%; height: 100%; border: 0; filter: invert(0.92) hue-rotate(180deg) saturate(0.3); }
+@media (max-width: 720px) { .location-grid { grid-template-columns: 1fr; } }
+
+/* FOOTER */
+.footer { padding: 50px 32px; border-top: 1px solid var(--line); }
+.footer-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; font-size: 12px; color: var(--ink-3); }
+.footer-brand { font-family: "Playfair Display", serif; font-size: 18px; color: var(--ink); }
+.footer a { color: var(--secondary); }
+
+/* ORDER MODAL */
+.order-modal { position: fixed; inset: 0; background: rgba(14,14,14,0.7); backdrop-filter: blur(8px); z-index: 100; display: none; align-items: center; justify-content: center; padding: 24px; }
+.order-modal.open { display: flex; }
+.om-card { background: #fff; border-radius: 8px; max-width: 460px; width: 100%; padding: 32px; position: relative; max-height: 90vh; overflow-y: auto; }
+
+/* Pro scroll animations */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(44px) scale(0.97);
+  transition: opacity 0.7s cubic-bezier(0.2,0,0,1), transform 0.7s cubic-bezier(0.2,0,0,1);
+}
+[data-reveal].in {
+  opacity: 1;
+  transform: none;
+}
+@keyframes heroIn {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: none; }
+}
+.hero-content > * { animation: heroIn 0.9s cubic-bezier(0.2,0,0,1) both; }
+.hero-content > :nth-child(1) { animation-delay: 0.05s; }
+.hero-content > :nth-child(2) { animation-delay: 0.18s; }
+.hero-content > :nth-child(3) { animation-delay: 0.3s; }
+.hero-content > :nth-child(4) { animation-delay: 0.42s; }
+.hero-content > :nth-child(5) { animation-delay: 0.54s; }
+.hero-inner > * { animation: heroIn 0.9s cubic-bezier(0.2,0,0,1) both; }
+.hero-inner > :nth-child(1) { animation-delay: 0.05s; }
+.hero-inner > :nth-child(2) { animation-delay: 0.18s; }
+.hero-inner > :nth-child(3) { animation-delay: 0.3s; }
+.hero-inner > :nth-child(4) { animation-delay: 0.42s; }
+.hero-inner > :nth-child(5) { animation-delay: 0.54s; }
+.om-close { position: absolute; top: 14px; right: 14px; background: none; border: 0; font-size: 26px; cursor: pointer; color: var(--ink-3); width: 36px; height: 36px; border-radius: 50%; }
+.om-close:hover { background: var(--surface); color: var(--ink); }
+.om-head { display: flex; gap: 16px; margin-bottom: 24px; align-items: flex-start; }
+.om-head img { width: 80px; height: 80px; border-radius: 4px; object-fit: cover; }
+.om-eyebrow { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--secondary); font-weight: 700; }
+.om-title { font-family: "Playfair Display", serif; font-size: 22px; font-weight: 700; margin: 4px 0 2px; }
+.om-price { font-size: 16px; color: var(--ink-2); font-weight: 600; }
+.om-label { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 8px; margin-top: 18px; }
+.om-variants { display: flex; flex-wrap: wrap; gap: 8px; }
+.om-var { background: var(--surface); border: 1px solid var(--line); padding: 8px 14px; border-radius: 999px; font-size: 13px; cursor: pointer; font-family: inherit; }
+.om-var.active { background: var(--ink); color: #fff; border-color: var(--ink); }
+.om-card textarea, .om-card input { width: 100%; border: 1px solid var(--line); border-radius: 4px; padding: 10px 12px; font-family: inherit; font-size: 14px; }
+.om-card textarea { min-height: 70px; resize: vertical; }
+.om-submit { width: 100%; background: #25D366; color: #fff; border: 0; padding: 14px; border-radius: 4px; font-size: 14px; font-weight: 700; cursor: pointer; margin-top: 20px; }
+.om-submit:hover { background: #1FB857; }
+.om-foot { text-align: center; font-size: 11px; color: var(--ink-3); margin-top: 10px; }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-brand">
+      
+      <span>La Trattoria Roma</span>
+    </div>
+    <div class="nav-links">
+      <a href="#about">Nosotros</a>
+      <a href="#menu">Carta</a>
+      <a href="#location">Ubicación</a>
+    </div>
+    <a href="#menu" class="nav-cta">Pedir ahora</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-content">
+    <div class="eyebrow">Pasta fresca · Pizzas al horno de leña</div>
+    <h1>Sentarse a la mesa es un acto de amor.</h1>
+    <p class="lede">Recetas de generación en generación, preparadas con la misma paciencia de siempre.</p>
+    <a href="#menu" class="hero-cta">
+      Ver la carta
+      <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+    <div class="hero-meta"><span>🕒 Mar–Dom · 12:00 a 23:00</span><span class="dot-sep">·</span><span>📷 <a href="https://instagram.com/trattoriaroma.co" target="_blank" rel="noopener">@trattoriaroma.co</a></span><span class="dot-sep">·</span><span>📞 +57 315 888 9900</span></div>
+  </div>
+  <div class="hero-visual">
+    <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1600&amp;q=80" alt="La Trattoria Roma" />
+    <div class="hero-stamp">
+      <span>Bogotá</span>
+      <span>EST. 2026</span>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div>
+        <div class="eyebrow">Nosotros</div>
+        <h2>El alma del lugar.</h2>
+      </div>
+      <div>
+        <p>Cocinamos como en casa: con tiempo, con producto, con cariño. Pasta estirada a mano cada mañana, salsas que cocinan cuatro horas, y una masa madre que tiene diez años.</p>
+        <div class="about-contact"><span>🕒 Mar–Dom · 12:00 a 23:00</span><span class="dot-sep">·</span><span>📷 <a href="https://instagram.com/trattoriaroma.co" target="_blank" rel="noopener">@trattoriaroma.co</a></span><span class="dot-sep">·</span><span>📞 +57 315 888 9900</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="menu" id="menu">
+  <div class="container">
+    <div class="menu-head">
+      <div class="eyebrow">Nuestra carta</div>
+      <h2>Lo que nos define.</h2>
+    </div>
+    <div class="menu-grid">
+      
+        <article class="dish" data-reveal style="transition-delay:0ms">
+          <div class="dish-img"><img src="https://images.unsplash.com/photo-1612874742237-6526221588e3?w=640&amp;q=80" alt="Pasta Carbonara" /></div>
+          <div class="dish-body">
+            <div class="dish-name">Pasta Carbonara</div>
+            <div class="dish-desc">Pasta fresca, huevo, guanciale crujiente, parmesano añejo. La receta romana.</div>
+            <div class="dish-row">
+              <div class="dish-price">$38.000</div>
+              <button class="dish-order" onclick="openOrder(0)">🛒 Pedir</button>
+            </div>
+          </div>
+        </article>
+        <article class="dish" data-reveal style="transition-delay:90ms">
+          <div class="dish-img"><img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=640&amp;q=80" alt="Pizza Margherita" /></div>
+          <div class="dish-body">
+            <div class="dish-name">Pizza Margherita</div>
+            <div class="dish-desc">Masa madre, tomate San Marzano, mozzarella fior di latte, albahaca.</div>
+            <div class="dish-row">
+              <div class="dish-price">$42.000</div>
+              <button class="dish-order" onclick="openOrder(1)">🛒 Pedir</button>
+            </div>
+          </div>
+        </article>
+        <article class="dish" data-reveal style="transition-delay:180ms">
+          <div class="dish-img"><img src="https://images.unsplash.com/photo-1476124369491-e7addf5db371?w=640&amp;q=80" alt="Risotto ai Funghi" /></div>
+          <div class="dish-body">
+            <div class="dish-name">Risotto ai Funghi</div>
+            <div class="dish-desc">Arroz arborio, hongos silvestres, vino blanco, parmesano añejo.</div>
+            <div class="dish-row">
+              <div class="dish-price">$46.000</div>
+              <button class="dish-order" onclick="openOrder(2)">🛒 Pedir</button>
+            </div>
+          </div>
+        </article>
+        <article class="dish" data-reveal style="transition-delay:270ms">
+          <div class="dish-img"><img src="https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=640&amp;q=80" alt="Tiramisú Casero" /></div>
+          <div class="dish-body">
+            <div class="dish-name">Tiramisú Casero</div>
+            <div class="dish-desc">Savoiardi, mascarpone, café espresso, cacao. La receta de la nonna.</div>
+            <div class="dish-row">
+              <div class="dish-price">$22.000</div>
+              <button class="dish-order" onclick="openOrder(3)">🛒 Pedir</button>
+            </div>
+          </div>
+        </article>
+        <article class="dish" data-reveal style="transition-delay:360ms">
+          <div class="dish-img"><img src="https://images.unsplash.com/photo-1572695157366-5e585ab2b69f?w=640&amp;q=80" alt="Bruschetta al Pomodoro" /></div>
+          <div class="dish-body">
+            <div class="dish-name">Bruschetta al Pomodoro</div>
+            <div class="dish-desc">Pan artesanal, tomate confitado, albahaca fresca, aceite de oliva.</div>
+            <div class="dish-row">
+              <div class="dish-price">$18.000</div>
+              <button class="dish-order" onclick="openOrder(4)">🛒 Pedir</button>
+            </div>
+          </div>
+        </article>
+    </div>
+  </div>
+</section>
+
+<section class="location" id="location">
+  <div class="container">
+    <div class="location-grid">
+      <div>
+        <div class="eyebrow">Ubicación</div>
+        <h2>Te esperamos.</h2>
+        <p>Nos encuentras en el corazón del 93. Reserva tu mesa y deja que te cuidemos.</p>
+        <div class="location-addr">
+          📍 Cll. 93 #11-27<br/>
+          <span style="opacity:0.6">Bogotá</span>
+        </div>
+        <div class="location-actions">
+          <button class="loc-btn" onclick="openMap('waze')">Ver en Waze →</button>
+          <button class="loc-btn ghost" onclick="openMap('maps')">Google Maps</button>
+        </div>
+      </div>
+      <div class="location-map">
+        <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=-74.05369999999999,4.6733,-74.0437,4.6793000000000005&marker=4.6763,-74.0487" loading="lazy"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">La Trattoria Roma</div>
+      <div style="margin-top:4px;">© 2026 · Todos los derechos reservados</div>
+    </div>
+    <div>Landing creada con ♥ por <a href="#" target="_blank">GOPLENTY GLOBAL</a></div>
+  </div>
+</footer>
+
+
+      <div id="order-modal" class="order-modal" role="dialog" aria-modal="true">
+        <div class="om-card">
+          <button class="om-close" onclick="closeOrder()" aria-label="Cerrar">×</button>
+          <div class="om-head">
+            <img id="om-img" src="" alt="" />
+            <div>
+              <div class="om-eyebrow">Pedido a WhatsApp</div>
+              <div class="om-title" id="om-dish">—</div>
+              <div class="om-price" id="om-price"></div>
+            </div>
+          </div>
+          <div id="om-variants-block">
+            <div class="om-label">Elige variante</div>
+            <div id="om-variants" class="om-variants"></div>
+          </div>
+          <div id="om-instructions-block">
+            <div class="om-label">¿Alguna instrucción especial?</div>
+            <textarea id="om-instructions" placeholder="Sin cebolla, sin salsa de maíz, término medio…"></textarea>
+          </div>
+          <div>
+            <div class="om-label">Tu nombre (opcional)</div>
+            <input id="om-name" type="text" placeholder="Para identificar tu pedido" />
+          </div>
+          <button class="om-submit" onclick="submitOrder()">✅ Enviar por WhatsApp</button>
+          <div class="om-foot">Se abrirá WhatsApp con el pedido listo para enviar.</div>
+        </div>
+      </div>
+    
+
+      <script>
+        const __DISHES__ = [{"name":"Pasta Carbonara","desc":"Pasta fresca, huevo, guanciale crujiente, parmesano añejo. La receta romana.","price":"38000","image":"https://images.unsplash.com/photo-1612874742237-6526221588e3?w=640&q=80","variants":["Spaghetti","Rigatoni","Pappardelle"],"allowCustom":true,"priceFormatted":"$38.000"},{"name":"Pizza Margherita","desc":"Masa madre, tomate San Marzano, mozzarella fior di latte, albahaca.","price":"42000","image":"https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=640&q=80","variants":["Personal","Familiar"],"allowCustom":true,"priceFormatted":"$42.000"},{"name":"Risotto ai Funghi","desc":"Arroz arborio, hongos silvestres, vino blanco, parmesano añejo.","price":"46000","image":"https://images.unsplash.com/photo-1476124369491-e7addf5db371?w=640&q=80","variants":[],"allowCustom":false,"priceFormatted":"$46.000"},{"name":"Tiramisú Casero","desc":"Savoiardi, mascarpone, café espresso, cacao. La receta de la nonna.","price":"22000","image":"https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=640&q=80","variants":[],"allowCustom":false,"priceFormatted":"$22.000"},{"name":"Bruschetta al Pomodoro","desc":"Pan artesanal, tomate confitado, albahaca fresca, aceite de oliva.","price":"18000","image":"https://images.unsplash.com/photo-1572695157366-5e585ab2b69f?w=640&q=80","variants":[],"allowCustom":false,"priceFormatted":"$18.000"}];
+        const __BIZ__ = {"name":"La Trattoria Roma","whatsapp":"","lat":4.6763,"lng":-74.0487,"address":"Cll. 93 #11-27"};
+
+        function openOrder(idx) {
+          const d = __DISHES__[idx];
+          if (!d) return;
+          const m = document.getElementById('order-modal');
+          document.getElementById('om-dish').textContent = d.name;
+          document.getElementById('om-price').textContent = d.priceFormatted || '';
+          document.getElementById('om-img').src = d.image || 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=640&q=80';
+
+          // Variantes
+          const vWrap = document.getElementById('om-variants');
+          vWrap.innerHTML = '';
+          if (d.variants && d.variants.length) {
+            document.getElementById('om-variants-block').style.display = '';
+            d.variants.forEach((v, i) => {
+              const b = document.createElement('button');
+              b.type = 'button';
+              b.className = 'om-var' + (i === 0 ? ' active' : '');
+              b.textContent = v;
+              b.onclick = () => {
+                vWrap.querySelectorAll('.om-var').forEach(x => x.classList.remove('active'));
+                b.classList.add('active');
+              };
+              vWrap.appendChild(b);
+            });
+          } else {
+            document.getElementById('om-variants-block').style.display = 'none';
+          }
+
+          // Custom instructions
+          const ic = document.getElementById('om-instructions-block');
+          ic.style.display = d.allowCustom ? '' : 'none';
+          document.getElementById('om-instructions').value = '';
+
+          document.getElementById('om-name').value = '';
+          m.classList.add('open');
+          m.dataset.dish = idx;
+        }
+        function closeOrder() {
+          document.getElementById('order-modal').classList.remove('open');
+        }
+        function submitOrder() {
+          const m = document.getElementById('order-modal');
+          const idx = m.dataset.dish;
+          const d = __DISHES__[idx];
+          if (!d) return;
+          const activeVar = m.querySelector('.om-var.active');
+          const variant = activeVar ? activeVar.textContent : '';
+          const instructions = document.getElementById('om-instructions').value.trim();
+          const customer = document.getElementById('om-name').value.trim();
+
+          let msg = '🍽 *NUEVO PEDIDO — ' + __BIZ__.name + '*\n\n';
+          if (customer) msg += '👤 Cliente: ' + customer + '\n';
+          msg += '🍴 Plato: ' + d.name + '\n';
+          if (d.priceFormatted) msg += '💰 Precio: ' + d.priceFormatted + '\n';
+          if (variant) msg += '📝 Variante: ' + variant + '\n';
+          if (instructions) msg += '✍️ Instrucciones: ' + instructions + '\n';
+          msg += '\n📲 Enviado desde la carta digital';
+
+          const url = 'https://wa.me/' + __BIZ__.whatsapp + '?text=' + encodeURIComponent(msg);
+          window.open(url, '_blank');
+        }
+        function openMap(provider) {
+          const lat = __BIZ__.lat, lng = __BIZ__.lng;
+          if (provider === 'waze' && lat && lng) {
+            window.open('https://waze.com/ul?ll=' + lat + ',' + lng + '&navigate=yes', '_blank');
+          } else {
+            const q = (lat && lng) ? (lat + ',' + lng) : encodeURIComponent(__BIZ__.address);
+            window.open('https://www.google.com/maps/search/?api=1&query=' + q, '_blank');
+          }
+        }
+
+        // smooth scroll for hero CTA
+        document.addEventListener('click', (e) => {
+          const a = e.target.closest('a[href^="#"]');
+          if (!a) return;
+          const id = a.getAttribute('href');
+          if (id && id.length > 1) {
+            const el = document.querySelector(id);
+            if (el) { e.preventDefault(); el.scrollIntoView({behavior: 'smooth', block: 'start'}); }
+          }
+        });
+
+        // Close modal on overlay click
+        document.addEventListener('DOMContentLoaded', () => {
+          const m = document.getElementById('order-modal');
+          if (m) m.addEventListener('click', (e) => { if (e.target === m) closeOrder(); });
+        });
+      </script>
+      
+<script>
+(function(){
+  // IntersectionObserver for scroll reveals
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -48px 0px' });
+  document.querySelectorAll('[data-reveal]').forEach(function(el){ obs.observe(el); });
+
+  // Parallax hero image
+  var heroImg = document.querySelector('.hero-visual img');
+  var heroImgBg = document.querySelector('.hero-img-bg');
+  var parallaxEl = heroImg || heroImgBg;
+  if(parallaxEl){
+    var ticking = false;
+    window.addEventListener('scroll', function(){
+      if(!ticking){
+        requestAnimationFrame(function(){
+          var y = window.scrollY;
+          parallaxEl.style.transform = 'translateY(' + (y * 0.22) + 'px)';
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+  }
+})();
+</script>
+    
+</body>
+</html>
